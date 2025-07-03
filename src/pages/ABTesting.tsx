@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import ResponsiveHeatmap from "@/components/dashboard/ResponsiveHeatmap";
+import ABTestingModule from "@/components/dashboard/ABTestingModule";
 
-const HeatmapVisualization = () => {
+const ABTesting = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
@@ -42,10 +42,10 @@ const HeatmapVisualization = () => {
     <div className="flex h-screen bg-background">
       <DashboardSidebar />
       <main className="flex-1 overflow-auto">
-        <ResponsiveHeatmap userId={user.id} />
+        <ABTestingModule userId={user.id} />
       </main>
     </div>
   );
 };
 
-export default HeatmapVisualization;
+export default ABTesting;

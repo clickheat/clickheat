@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,10 +18,12 @@ import {
   LifeBuoy,
   LogOut,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ExternalLink
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useRealTimeData } from "@/hooks/useRealTimeData";
 
 interface SidebarItem {
   id: string;
@@ -36,6 +37,10 @@ const DashboardSidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { data } = useRealTimeData();
+
+  const bioPages = data.bioPages || [];
+  const currentBioPage = bioPages[0];
 
   const sidebarItems: SidebarItem[] = [
     // Main Navigation
@@ -65,6 +70,15 @@ const DashboardSidebar = () => {
       navigate("/");
     } catch (error) {
       toast.error("Error logging out");
+    }
+  };
+
+  const handleViewLivePage = () => {
+    if (currentBioPage) {
+      // Open in new tab to avoid navigation issues
+      window.open(`/bio/${currentBioPage.id}`, '_blank');
+    } else {
+      toast.error("No bio page found. Please create one first.");
     }
   };
 
@@ -123,6 +137,21 @@ const DashboardSidebar = () => {
           </div>
         )}
       </div>
+
+      {/* View Live Page Button */}
+      {!collapsed && currentBioPage && (
+        <div className="p-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleViewLivePage}
+            className="w-full"
+          >
+            <ExternalLink className="h-4 w-4 mr-2" />
+            View Live Page
+          </Button>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="flex-1 overflow-y-auto p-2 space-y-4">
