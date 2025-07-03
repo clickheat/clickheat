@@ -1,13 +1,14 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import DashboardHome from "@/components/dashboard/DashboardHome";
+import RealTimeDashboard from "@/components/dashboard/RealTimeDashboard";
+import OnboardingModal from "@/components/modals/OnboardingModal";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +28,7 @@ const Dashboard = () => {
         .single();
 
       if (!profile?.onboarding_completed) {
-        navigate("/onboarding");
-        return;
+        setShowOnboarding(true);
       }
 
       setUser(user);
@@ -46,6 +46,10 @@ const Dashboard = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -60,12 +64,21 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex h-screen bg-background">
-      <DashboardSidebar />
-      <main className="flex-1 overflow-auto">
-        <DashboardHome />
-      </main>
-    </div>
+    <>
+      <div className="flex h-screen bg-background">
+        <DashboardSidebar />
+        <main className="flex-1 overflow-auto">
+          <RealTimeDashboard userId={user.id} />
+        </main>
+      </div>
+      
+      {/* Modal-based Onboarding */}
+      <OnboardingModal
+        isOpen={showOnboarding}
+        onClose={handleOnboardingComplete}
+        userId={user.id}
+      />
+    </>
   );
 };
 
