@@ -9,7 +9,182 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      bio_pages: {
+        Row: {
+          created_at: string | null
+          custom_domain: string | null
+          description: string | null
+          id: string
+          is_published: boolean | null
+          theme: string | null
+          title: string
+          tracking_code: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          custom_domain?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          theme?: string | null
+          title?: string
+          tracking_code?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          custom_domain?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          theme?: string | null
+          title?: string
+          tracking_code?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      click_analytics: {
+        Row: {
+          bio_page_id: string
+          city: string | null
+          clicked_at: string | null
+          country: string | null
+          id: string
+          ip_address: unknown | null
+          link_id: string
+          referrer: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          bio_page_id: string
+          city?: string | null
+          clicked_at?: string | null
+          country?: string | null
+          id?: string
+          ip_address?: unknown | null
+          link_id: string
+          referrer?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          bio_page_id?: string
+          city?: string | null
+          clicked_at?: string | null
+          country?: string | null
+          id?: string
+          ip_address?: unknown | null
+          link_id?: string
+          referrer?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "click_analytics_bio_page_id_fkey"
+            columns: ["bio_page_id"]
+            isOneToOne: false
+            referencedRelation: "bio_pages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "click_analytics_link_id_fkey"
+            columns: ["link_id"]
+            isOneToOne: false
+            referencedRelation: "links"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      links: {
+        Row: {
+          bio_page_id: string
+          created_at: string | null
+          description: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          position: number | null
+          style: Json | null
+          title: string
+          updated_at: string | null
+          url: string
+        }
+        Insert: {
+          bio_page_id: string
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          position?: number | null
+          style?: Json | null
+          title: string
+          updated_at?: string | null
+          url: string
+        }
+        Update: {
+          bio_page_id?: string
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          position?: number | null
+          style?: Json | null
+          title?: string
+          updated_at?: string | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "links_bio_page_id_fkey"
+            columns: ["bio_page_id"]
+            isOneToOne: false
+            referencedRelation: "bio_pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          onboarding_completed: boolean | null
+          onboarding_step: number | null
+          page_type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          onboarding_completed?: boolean | null
+          onboarding_step?: number | null
+          page_type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          onboarding_completed?: boolean | null
+          onboarding_step?: number | null
+          page_type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

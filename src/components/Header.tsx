@@ -1,9 +1,12 @@
+
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
@@ -37,8 +40,12 @@ const Header = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="hero">Get Started Free</Button>
+            <Button variant="ghost" onClick={() => navigate("/login")}>
+              Sign In
+            </Button>
+            <Button variant="hero" onClick={() => navigate("/signup")}>
+              Get Started Free
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,8 +74,12 @@ const Header = () => {
                 Testimonials
               </a>
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="ghost">Sign In</Button>
-                <Button variant="hero">Get Started Free</Button>
+                <Button variant="ghost" onClick={() => navigate("/login")}>
+                  Sign In
+                </Button>
+                <Button variant="hero" onClick={() => navigate("/signup")}>
+                  Get Started Free
+                </Button>
               </div>
             </nav>
           </div>
