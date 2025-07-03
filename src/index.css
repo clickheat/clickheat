@@ -17,24 +17,44 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Heatmap-inspired primary colors */
+    --primary: 0 85% 60%;
+    --primary-foreground: 0 0% 98%;
+    
+    /* Heat gradient colors */
+    --heat-intense: 0 100% 50%;
+    --heat-warm: 14 100% 57%;
+    --heat-medium: 28 100% 60%;
+    --heat-cool: 45 100% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 15 100% 96%;
+    --secondary-foreground: 0 85% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 15 25% 95%;
+    --muted-foreground: 15 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 28 100% 60%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 15 20% 90%;
+    --input: 15 15% 92%;
+    --ring: 0 85% 60%;
+
+    /* Custom design tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--heat-intense)), hsl(var(--heat-warm)));
+    --gradient-section: linear-gradient(180deg, hsl(var(--background)), hsl(var(--secondary)));
+    --gradient-heat: linear-gradient(90deg, hsl(var(--heat-cool)), hsl(var(--heat-medium)), hsl(var(--heat-warm)), hsl(var(--heat-intense)));
+    
+    /* Shadows with heat theme */
+    --shadow-heat: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--heat-warm) / 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
